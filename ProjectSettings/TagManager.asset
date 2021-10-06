@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Water
+  - Enemy
+  - Checkpoint
+  - Bullet
   layers:
   - Default
   - TransparentFX

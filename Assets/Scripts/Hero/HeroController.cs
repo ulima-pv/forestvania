@@ -11,6 +11,7 @@ public class HeroController : MonoBehaviour
     public float fallMultiplier;
     public float lowJumpMultiplier;
     public GameObject bulletPrefab;
+    public GhostController ghost;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -54,6 +55,11 @@ public class HeroController : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // Terminar el juego
+            Application.Quit();
+        }
         if (isAlive)
         {
             if (isJumping)
