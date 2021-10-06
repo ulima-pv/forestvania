@@ -6,6 +6,7 @@ public class BulletController : MonoBehaviour
 {
     public float speed;
     public float timeTillDestroy; // Tiempo hasta que se destruya la bala (seg)
+    public int damage; // Danho a personaje
 
     private float time = 0f;
     private bool left = false;
