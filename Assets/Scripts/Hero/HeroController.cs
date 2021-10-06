@@ -153,7 +153,7 @@ public class HeroController : MonoBehaviour
         }
     }
 
-    private void Fire()
+    public void Fire()
     {
         animator.SetTrigger("fire");
         if (transform.localScale.x == -1f)
