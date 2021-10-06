@@ -3,8 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BuildType
+{
+    Mobile, Desktop
+}
+
 public class HeroController : MonoBehaviour
 {
+    public BuildType buildType;
     public float speed;
     public float jumpSpeed;
     public float extraSpace;
@@ -12,6 +18,7 @@ public class HeroController : MonoBehaviour
     public float lowJumpMultiplier;
     public GameObject bulletPrefab;
     public GhostController ghost;
+    public Joystick joystick;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -76,7 +83,14 @@ public class HeroController : MonoBehaviour
                 Fire();
             }
 
-            float movement = Input.GetAxisRaw("Horizontal");
+            float movement = 0f;
+            if (buildType == BuildType.Desktop)
+            {
+                movement = Input.GetAxisRaw("Horizontal");
+            }else
+            {
+                movement = joystick.Horizontal;
+            }
 
             if (movement != 0f)
             {
@@ -113,9 +127,19 @@ public class HeroController : MonoBehaviour
 
             transform.position += Vector3.right * movement * speed * Time.deltaTime;
 
-            if (Input.GetButton("Jump") && !isJumping)
+            if (buildType == BuildType.Desktop)
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+                if (Input.GetButton("Jump") && !isJumping)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+                }
+            }else
+            {
+                float vertical = joystick.Vertical;
+                if (vertical > 0.5f && !isJumping)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+                }
             }
         } else
         {
