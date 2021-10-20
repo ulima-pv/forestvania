@@ -6,15 +6,18 @@ namespace ForestVania.Hero.States
 {
     public class HeroIdleState : HeroState
     {
-        private float movement;
+        private Animator animator;
+
         public HeroIdleState(HeroController controller, HeroStateMachine fsm) : base(controller, fsm)
         {
-            movement = 0f;
+            controller.movement = 0f;
+            animator = controller.GetComponent<Animator>();
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
+            animator.SetBool("isRunning", false);
         }
 
         public override void OnExit()
@@ -27,18 +30,38 @@ namespace ForestVania.Hero.States
             base.OnHandleInput();
             if (controller.buildType == BuildType.Desktop)
             {
-                movement = Input.GetAxisRaw("Horizontal");
+                controller.movement = Input.GetAxisRaw("Horizontal");
             }
             else
             {
-                movement = controller.joystick.Horizontal;
+                controller.movement = controller.joystick.Horizontal;
             }
 
+            if (controller.buildType == BuildType.Desktop)
+            {
+                if (Input.GetButton("Jump") )
+                {
+                    controller.Jump();
+                }
+            }
+            else
+            {
+                float vertical = controller.joystick.Vertical;
+                if (vertical > 0.5f)
+                {
+                    controller.Jump();
+                }
+            }
         }
 
         public override void OnLogicUpdate()
         {
             base.OnLogicUpdate();
+            if (controller.movement != 0)
+            {
+                // Hay movimiento
+                controller.Move();
+            }
         }
 
         public override void OnPhysicsUpdate()

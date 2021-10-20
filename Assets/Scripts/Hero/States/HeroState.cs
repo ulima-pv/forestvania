@@ -17,7 +17,14 @@ namespace ForestVania.Hero.States
 
         public virtual void OnPhysicsUpdate() { }
         public virtual void OnLogicUpdate() { }
-        public virtual void OnHandleInput() { }
+        public virtual void OnHandleInput() 
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                // Terminar el juego
+                Application.Quit();
+            }
+        }
         public virtual void OnEnter() { }
         public virtual void OnExit() { }
     }
