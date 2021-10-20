@@ -4,7 +4,34 @@ using UnityEngine;
 
 namespace ForestVania.Hero.States
 {
-    public class HeroShootingState
+    public class HeroShootingState : HeroState
     {
+        public HeroShootingState(HeroController controller, HeroStateMachine fsm) : base(controller, fsm)
+        {
+        }
+        public override void OnEnter()
+        {
+            base.OnEnter();
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
+
+        public override void OnHandleInput()
+        {
+            base.OnHandleInput();
+        }
+
+        public override void OnLogicUpdate()
+        {
+            base.OnLogicUpdate();
+        }
+
+        public override void OnPhysicsUpdate()
+        {
+            base.OnPhysicsUpdate();
+        }
     }
 }

@@ -4,7 +4,21 @@ using UnityEngine;
 
 namespace ForestVania.Hero.States
 {
-    public class HeroState
+    public abstract class HeroState
     {
+        protected HeroController controller;
+        protected HeroStateMachine fsm;
+
+        public HeroState(HeroController controller, HeroStateMachine fsm)
+        {
+            this.controller = controller;
+            this.fsm = fsm;
+        }
+
+        public virtual void OnPhysicsUpdate() { }
+        public virtual void OnLogicUpdate() { }
+        public virtual void OnHandleInput() { }
+        public virtual void OnEnter() { }
+        public virtual void OnExit() { }
     }
 }

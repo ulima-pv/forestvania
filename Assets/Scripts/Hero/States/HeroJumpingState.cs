@@ -4,7 +4,35 @@ using UnityEngine;
 
 namespace ForestVania.Hero.States
 {
-    public class HeroJumpingState
+    public class HeroJumpingState : HeroState
     {
+        public HeroJumpingState(HeroController controller, HeroStateMachine fsm) : base(controller, fsm)
+        {
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
+
+        public override void OnHandleInput()
+        {
+            base.OnHandleInput();
+        }
+
+        public override void OnLogicUpdate()
+        {
+            base.OnLogicUpdate();
+        }
+
+        public override void OnPhysicsUpdate()
+        {
+            base.OnPhysicsUpdate();
+        }
     }
 }

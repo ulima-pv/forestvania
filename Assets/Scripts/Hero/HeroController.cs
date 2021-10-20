@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ForestVania.Hero.States;
 
 namespace ForestVania.Hero
 {
@@ -22,6 +23,14 @@ namespace ForestVania.Hero
         public GhostController ghost;
         public Joystick joystick;
 
+        // FSM
+        private HeroStateMachine fsm;
+        private HeroIdleState heroIdleState;
+        private HeroJumpingState heroJumpingState;
+        private HeroRunningState heroRunningState;
+        private HeroShootingState heroShootingState;
+
+
         private Animator animator;
         private Rigidbody2D rb;
         private CapsuleCollider2D capsuleCollider;
@@ -34,10 +43,17 @@ namespace ForestVania.Hero
         private void Awake()
         {
             firePoint = transform.Find("FirePoint");
+            fsm = new HeroStateMachine();
+            heroIdleState = new HeroIdleState(this, fsm);
+            heroJumpingState = new HeroJumpingState(this, fsm);
+            heroRunningState = new HeroRunningState(this, fsm);
+            heroShootingState = new HeroShootingState(this, fsm);
         }
 
         private void Start()
         {
+            fsm.Start(heroIdleState);
+            
             animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
             capsuleCollider = GetComponent<CapsuleCollider2D>();
@@ -64,6 +80,20 @@ namespace ForestVania.Hero
 
         private void Update()
         {
+            fsm.CurrentState.OnHandleInput();
+
+
+
+
+
+
+
+
+
+
+
+
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 // Terminar el juego
